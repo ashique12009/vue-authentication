@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    handleRegisterSubmit(){
+    async handleRegisterSubmit() {
       const registerData = {
         first_name: this.first_name,
         last_name: this.last_name,
@@ -50,16 +50,9 @@ export default {
         password_confirm: this.password_confirm,
       }
       
-      axios.post('http://localhost:8000/api/register', registerData)
-        .then(
-          res => {
-            console.log(res);
-          }
-        ).catch(
-          err => {
-            console.log(err);
-          }
-        );
+      await axios.post('http://localhost:8000/api/register', registerData);
+
+      this.$router.push('/login');
     }
   }
 }
