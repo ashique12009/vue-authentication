@@ -27,12 +27,17 @@ export default {
   },
   methods: {
     async handleLoginSubmit() {
-      const response = await axios.post('http://localhost:8000/api/login', {
+      const response = await axios.post('login', {
         email: this.email,
         password: this.password
       });
 
-      console.log(response);
+      if (response.data.token != '') {
+        localStorage.setItem('token', response.data.token);
+        
+        // Now redirect to profile page
+        this.$router.push('/profile');
+      }
     }
   }
 }

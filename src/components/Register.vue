@@ -50,7 +50,7 @@ export default {
         password_confirm: this.password_confirm,
       }
       
-      await axios.post('http://localhost:8000/api/register', registerData);
+      await axios.post('register', registerData);
 
       this.$router.push('/login');
     }
