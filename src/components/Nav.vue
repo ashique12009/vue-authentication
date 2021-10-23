@@ -9,7 +9,7 @@
         </ul>
 
         <ul class="navbar-nav ml-auto" v-if="user">
-          <li class="nav-item"><router-link to="Login" class="nav-link">Logout</router-link></li>
+          <li class="nav-item"><a href="javascript:void(0)" class="nav-link" @click="handleLogout">Logout</a></li>
         </ul>
       </div>
     </div>
@@ -31,6 +31,12 @@ export default {
 
     if (response.data.id != '') {
       this.user = response.data;
+    }
+  },
+  methods: {
+    handleLogout() {
+      localStorage.removeItem('token');
+      this.$router.push('/login');
     }
   }
 }
