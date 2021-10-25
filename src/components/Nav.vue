@@ -17,27 +17,22 @@
 </template>
 
 <script>
-import axios from 'axios';
+import { mapGetters } from 'vuex';
 
 export default {
   name: 'Nav',
-  data() {
-    return {
-      user: ''
-    }
-  },
-  async created() {
-    const response = await axios.get('user');
-
-    if (response.data.id != '') {
-      this.user = response.data;
-    }
-  },
   methods: {
     handleLogout() {
       localStorage.removeItem('token');
+
+      // Store null to user to vuex store
+      this.$store.dispatch('user', null);
+      
       this.$router.push('/login');
     }
+  },
+  computed: {
+    ...mapGetters(['user'])
   }
 }
 </script>

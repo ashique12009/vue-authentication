@@ -35,6 +35,9 @@ export default {
       if (response.data.token != '') {
         localStorage.setItem('token', response.data.token);
         
+        // Store user to store
+        this.$store.dispatch('user', response.data.user);
+
         // Now redirect to profile page
         this.$router.push('/profile');
       }

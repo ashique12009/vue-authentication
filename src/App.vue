@@ -11,12 +11,22 @@
 </template>
 
 <script>
+import axios from 'axios';
 import Nav from './components/Nav.vue';
 
 export default {
   name: 'App',
   components: {
     Nav, 
+  },
+  async created() {
+    await axios.get('user').then(res => {
+      // Store user to vuex store
+      this.$store.dispatch('user', res.data);
+    }).catch(error => {
+      console.log(error);
+      this.$store.dispatch('user', null);
+    });
   }
 }
 </script>
